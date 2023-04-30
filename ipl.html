@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Info_Viz</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+
+<body style="background-color:beige;">
+    </header>
+    <center>
+        <h1>
+            <font color="black"> Election Dataset </font>
+        </h1>
+    </center>
+    </header>
+
+    <center>
+        <div class='tableauPlaceholder' id='viz1677558683598' style='position: relative'>
+            <noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;9Q&#47;9QWCYNNRP&#47;
+1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='path' value='shared&#47;9QWCYNNRP' />
+                <param name='toolbar' value='yes' />
+                <param name='static_image'
+                    value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;9Q&#47;9QWCYNNRP&#47;1.png' />
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='en-US' />
+            </object>
+        </div>
+        <p>---------------------------------------------------------------------------------------------------------------------------------------</p><br>
+        <h1>
+            <font color="black"> IPL Dataset</font>
+        </h1>
+        </center>
+        <h2>About Dataset </h2>
+        <h4><p>
+            The Indian Premier League (IPL) batting dataset is a collection of statistics related to the batting performances of players in the IPL,
+            a professional Twenty20 cricket league in India.
+            The dataset includes information such as the number of runs scored,
+            number of balls faced, strike rate, number of fours and sixes hit, and other related metrics for each individual player in each season of the IPL.
+            The dataset also includes information on the teams and matches played.
+            This dataset is often used by cricket enthusiasts, statisticians and researchers to analyze player performances and trends over time, and to gain insights into the game of cricket.
+            </p>
+           <h3>Highlights</h3>
+            <p>
+                <ul>
+                    <li>I perform vizualization using Tableau, Python, D3.js.</li>
+                    <li>You will get some intresting vizualization like:</li>
+                    <ul>
+                        <li>BOUNDARY BY BALL</li>
+                        <li>MOST BOUNDARY BY PLAYERS</li>
+                        <li>DUCK PERCENTAGE</li>
+                        
+                    <ul/>
+                </ul>
+            
+            </p>
+        </h4>
+        <center>
+            <h1>IPL Dataset TABLEAU</h1>
+        <div class='tableauPlaceholder' id='viz1682483251773' style='position: relative'><noscript><a href='#'><img
+                alt='Dashboard 1 '
+                src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;IP&#47;IPLBattingStats_16781813837030&#47;Dashboard1&#47;1_rss.png'
+                style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
+        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+        <param name='embed_code_version' value='3' />
+        <param name='site_root' value='' />
+        <param name='name' value='IPLBattingStats_16781813837030&#47;Dashboard1' />
+        <param name='tabs' value='no' />
+        <param name='toolbar' value='yes' />
+        <param name='static_image'
+            value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;IP&#47;IPLBattingStats_16781813837030&#47;Dashboard1&#47;1.png' />
+        <param name='animate_transition' value='yes' />
+        <param name='display_static_image' value='yes' />
+        <param name='display_spinner' value='yes' />
+        <param name='display_overlay' value='yes' />
+        <param name='display_count' value='yes' />
+        <param name='language' value='en-US' />
+    </object></div>
+    <h1>
+        <font color="black"> IPL Dataset Python</font>
+    </h1>
+    <img src="./top_players.png" alt="top_players">
+    <h1>
+        <font color="black"> IPL Dataset D3.js </font>
+    </h1>
+    <div id="chart"></div>
+    </center>
+
+        <script type='text/javascript'>
+            var divElement = document.getElementById('viz1677558683598');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            vizElement.style.width = '1000px'; vizElement.style.height = '827px';
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);   
+            
+               var divElement = document.getElementById('viz1682483251773'); var vizElement = divElement.getElementsByTagName('object')[0]; if (divElement.offsetWidth > 800) { vizElement.style.width = '1000px'; vizElement.style.height = '827px'; } else if (divElement.offsetWidth > 500) { vizElement.style.width = '1000px'; vizElement.style.height = '827px'; } else { vizElement.style.width = '100%'; vizElement.style.height = '1427px'; } var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+        </script>
+        
+        <script>
+            d3.csv("dataset.csv").then(function(data) {
+              data.forEach(function(d) {
+                d.RUNS = +d.RUNS;
+                d.STRIKE_RATE = +d.STRIKE_RATE;
+              });
+              
+              var margin = {top: 20, right: 20, bottom: 30, left: 40},
+                  width = 960 - margin.left - margin.right,
+                  height = 500 - margin.top - margin.bottom;
+              
+              var x = d3.scaleLinear()
+                  .domain(d3.extent(data, function(d) { return d.STRIKE_RATE; })).nice()
+                  .range([0, width]);
+              
+              var y = d3.scaleLinear()
+                  .domain(d3.extent(data, function(d) { return d.RUNS; })).nice()
+                  .range([height, 0]);
+              
+              var svg = d3.select("#chart").append("svg")
+                  .attr("width", width + margin.left + margin.right)
+                  .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+              
+              svg.append("g")
+                  .attr("transform", "translate(0," + height + ")")
+                  .call(d3.axisBottom(x))
+                .append("text")
+                  .attr("fill", "#000")
+                  .attr("x", width)
+                  .attr("y", -6)
+                  .attr("text-anchor", "end")
+                  .text("Strike Rate");
+              
+              svg.append("g")
+                  .call(d3.axisLeft(y))
+                .append("text")
+                  .attr("fill", "#000")
+                  .attr("transform", "rotate(-90)")
+                  .attr("y", 6)
+                  .attr("dy", "0.71em")
+                  .attr("text-anchor", "end")
+                  .text("Runs");
+              
+              svg.selectAll(".dot")
+                  .data(data)
+                .enter().append("circle")
+                  .attr("class", "dot")
+                  .attr("r", 5)
+                  .attr("cx", function(d) { return x(d.STRIKE_RATE); })
+                  .attr("cy", function(d) { return y(d.RUNS); })
+                  .style("fill", "steelblue");
+            });
+          </script>
+<h2>Reference and links</h2>
+
+    <p>
+         <ul>
+                        <li><a href="https://www.espncricinfo.com/?ex_cid=google_cpc:search:dsa:ipl2023&gclid=CjwKCAjw9J2iBhBPEiwAErwpebJSI2GPeb0nsE0eR5BsbkzFOfBvBIFeoP3J_a-ehBcZ5Bnzaizg7hoC7MYQAvD_BwE" >Espncrickinfo</a></li>
+                        <li><a href="https://www.iplt20.com/" >Iplofficial page</a></li>
+                        <li><a href="https://chat.openai.com/" >ChatGPT</a></li>
+             
+                        
+                        
+         <ul/>
+    </p>
+</body>
+
+</html>
